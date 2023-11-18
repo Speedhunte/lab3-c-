@@ -1,0 +1,50 @@
+#include <iostream>
+#include <ctime>
+#include <cstdlib>
+#include <chrono>
+
+using namespace std;
+
+void bubbleSort(int arr[], int n) {
+    for (int i = 0; i < n - 1; ++i) {
+        for (int j = 0; j < n - i - 1; ++j) {
+            if (arr[j] < arr[j + 1]) {
+               
+                int temp = arr[j];
+                arr[j] = arr[j + 1];
+                arr[j + 1] = temp;
+            }
+        }
+    }
+}
+
+int minimizeDifference(int numbers[], int n) {
+
+    int sumGroup1 = 0;
+    int sumGroup2 = 0;
+    bubbleSort(numbers, n);
+
+    for (int i = 0; i < n; ++i) {
+
+        if (sumGroup1 <= sumGroup2) {
+            sumGroup1 += numbers[i];
+        }
+        else {
+            sumGroup2 += numbers[i];
+        }
+    }
+
+
+    return abs(sumGroup1 - sumGroup2);
+}
+
+int main() {
+
+    const int n = 4;
+    int numbers[n]={1,2,6,1000};
+
+    int result = minimizeDifference(numbers, n);
+    cout<<result;
+
+    return 0;
+}
